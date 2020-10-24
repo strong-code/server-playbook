@@ -1,2 +1,5 @@
-[all]
-chl-server ansible_host=107.170.227.56
+[local]
+127.0.0.1
+
+[remote]
+chl-server ansible_host=198.199.117.234 ansible_user=root

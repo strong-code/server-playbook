@@ -1,0 +1,8 @@
+---
+- name: Install, configure and start nginx with sites-enabled configs 
+  block:
+    - name: Install nginx
+      apt:
+        name: nginx
+        state: present
+      become: true

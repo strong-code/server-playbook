@@ -1,0 +1,7 @@
+---
+- name: chl-server setup
+  hosts: "{{ var_host | default('remote') }}"
+
+  tasks:
+    - include_tasks: tasks/apt.yml
+    - include_tasks: tasks/docker.yml
