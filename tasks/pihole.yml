@@ -1,0 +1,31 @@
+---
+- name: Create pihole data dir
+  file: 
+    path: /etc/pihole
+    state: directory
+    mode: 0755 
+
+- name: Create dnsmasq.d data dir
+  file:
+    path: /etc/dnsmasq.d
+    state: directory 
+    mode: 0755
+
+- name: Pull down and run pihole docker container
+  shell:
+    cmd: >
+      docker run -d --name pihole
+      -p {{ ansible_default_ipv4.address }}:53:53/tcp
+      -p {{ ansible_default_ipv4.address }}:53:53/udp
+      -p {{ ansible_default_ipv4.address }}:80:80
+      -p {{ ansible_default_ipv4.address }}:443:443
+      -e TZ="America/Los Angeles"
+      -v /etc/pihole/:/etc/pihole/
+      -v /etc/dnsmasq.d/:/etc/dnsmasq.d/
+      --dns=127.0.0.1 --dns=9.9.9.9
+      --restart=unless-stopped
+      --hostname pi.hole
+      -e VIRTUAL_HOST="pi.hole"
+      -e PROXY_LOCATION="pi.hole"
+      -e ServerIP="{{ ansible_default_ipv4.address }}"
+      pihole/pihole:latest
