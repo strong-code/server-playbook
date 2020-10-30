@@ -1,6 +1,14 @@
 ---
 - name: chl-server setup
   hosts: "{{ var_host | default('remote') }}"
+  become: yes
+
+  pre_tasks:
+    - name: Update apt cache
+      apt:
+        update_cache: yes
+        cache_valid_time: 3600
+        autoclean: yes
 
   tasks:
     - include_tasks: tasks/apt.yml
