@@ -15,3 +15,5 @@
       tags: docker
     - include_tasks: tasks/pihole.yml
       tags: pihole
+    - include_tasks: tasks/dotfiles.yml
+      tags: dotfiles

@@ -1,0 +1,13 @@
+---
+- name: Create code dir structure 
+  file:
+    path: /root/Documents/code
+    state: directory
+    mode: 0755
+
+- name: Clone dotfiles repo
+  git: 
+    repo: https://github.com/strong-code/dotfiles.git 
+    dest: /root/Documents/code/dotfiles
+    version: master
+    accept_hostkey: yes
