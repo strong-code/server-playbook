@@ -12,20 +12,28 @@
     mode: 0755
 
 - name: Pull down and run pihole docker container
-  shell:
-    cmd: >
-      docker run -d --name pihole
-      -p {{ ansible_default_ipv4.address }}:53:53/tcp
-      -p {{ ansible_default_ipv4.address }}:53:53/udp
-      -p {{ ansible_default_ipv4.address }}:80:80
-      -p {{ ansible_default_ipv4.address }}:443:443
-      -e TZ="America/Los Angeles"
-      -v /etc/pihole/:/etc/pihole/
-      -v /etc/dnsmasq.d/:/etc/dnsmasq.d/
-      --dns=127.0.0.1 --dns=9.9.9.9
-      --restart=unless-stopped
-      --hostname pi.hole
-      -e VIRTUAL_HOST="pi.hole"
-      -e PROXY_LOCATION="pi.hole"
-      -e ServerIP="{{ ansible_default_ipv4.address }}"
-      pihole/pihole:latest
+  docker_container:
+    name: pihole
+    image: pihole/pihole:latest
+    pull: true
+    state: started
+    detach: yes
+    restart_policy: unless-stopped
+    hostname: pi.hole
+    published_ports:
+      - "{{ ansible_default_ipv4.address }}:53:53/tcp"
+      - "{{ ansible_default_ipv4.address }}:53:53/udp"
+      - "{{ ansible_default_ipv4.address }}:80:80"
+      - "{{ ansible_default_ipv4.address }}:443:443"
+    dns_servers:
+      - 127.0.0.1
+      - 9.9.9.9
+    volumes:
+      - /etc/pihole/:/etc/pihole/
+      - /etc/dnsmasq.d/:/etc/dnsmasq.d/
+    env:
+      VIRTUAL_HOST: pi.hole
+      PROXY_LOCATION: pi.hole
+      TZ: America/Los Angeles
+      ServerIP: "{{ ansible_default_ipv4.address }}"
+

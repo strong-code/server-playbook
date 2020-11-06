@@ -32,4 +32,8 @@
         - docker-ce
         - docker-ce-cli
         - containerd.io
+        - python3-pip
 
+    - name: Install python Docker sdk
+      pip:
+        name: docker 
