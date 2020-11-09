@@ -1,13 +1,77 @@
 ---
-- name: Create code dir structure 
-  file:
-    path: /root/Documents/code
-    state: directory
-    mode: 0755
+- block:
+  - name: Set task variables
+    set_fact:
+      dotfiles_path: /home/chl/Documents/code/dotfiles
 
-- name: Clone dotfiles repo
-  git: 
-    repo: https://github.com/strong-code/dotfiles.git 
-    dest: /root/Documents/code/dotfiles
-    version: master
-    accept_hostkey: yes
+  - name: Clear out DO gargabe
+    file:
+      path: "~/.{{ item }}"
+      state: absent
+    loop:
+      - bash_logout
+      - bashrc
+      - profile  
+
+  - name: Create code dir structure 
+    file:
+      path: ~/Documents/code 
+      state: directory
+      owner: chl
+      mode: 0755
+
+  - name: Clone dotfiles repo
+    git: 
+      repo: https://github.com/strong-code/dotfiles.git 
+      dest: "{{ dotfiles_path }}" 
+      version: master
+      accept_hostkey: yes
+
+  - name: Symlink .bash_profile
+    file:
+      src: "{{ dotfiles_path }}/.bash_profile"
+      dest: ~/.bash_profile
+      owner: chl
+      state: link
+
+  - name: Create ~/.ssh directory
+    file:
+      path: ~/.ssh
+      state: directory
+      owner: chl
+      mode: 0755
+
+  - name: Symlink authorized_keys
+    file:
+      src: "{{ dotfiles_path }}/server/authorized_keys"
+      dest: ~/.ssh/authorized_keys
+      owner: chl
+      mode: 0644
+      state: link
+
+  - name: Add crontab
+    command: "crontab {{ dotfiles_path }}/server/.crontab" 
+
+  - name: Symlink irssi directory
+    file:
+      src: "{{ dotfiles_path }}/irssi"
+      dest: ~/.irssi
+      owner: chl
+      state: link
+
+  - name: Symlink tmux conf
+    file:
+      src: "{{ dotfiles_path }}/tmux/.tmux.conf"
+      dest: ~/.tmux.conf
+      owner: chl
+      state: link
+
+  - name: Symlink tmux directory
+    file:
+      src: "{{ dotfiles_path }}/tmux/.tmux"
+      dest: ~/.tmux
+      owner: chl
+      state: link
+
+  become: yes
+  become_user: chl

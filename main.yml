@@ -11,6 +11,8 @@
         autoclean: yes
 
   tasks:
+    - include_tasks: tasks/users.yml
+      tags: users
     - include_tasks: tasks/docker.yml
       tags: docker
     - include_tasks: tasks/pihole.yml
