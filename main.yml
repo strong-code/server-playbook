@@ -19,3 +19,5 @@
       tags: pihole
     - include_tasks: tasks/dotfiles.yml
       tags: dotfiles
+    - include_tasks: tasks/irssi.yml
+      tags: irssi
