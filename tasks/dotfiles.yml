@@ -73,5 +73,30 @@
       owner: chl
       state: link
 
+  - name: Symlink vim directory
+    file:
+      src: "{{ dotfiles_path }}/vim/.vim"
+      dest: ~/.vim
+      owner: chl
+      state: link
+
+  - name: Symlink .vimrc
+    file:
+      src: "{{ dotfiles_path }}/vim/.vimrc"
+      dest: ~/.vimrc
+      owner: chl
+      state: link
+
+  - name: Symlink global git files
+    file:
+      src: "{{ item.src }}"
+      dest: "{{ item.dest}}"
+      owner: chl
+      state: link
+    loop:
+      - { src: "{{ dotfiles_path }}/git/.git-prompt.sh", dest: '~/.git-prompt.sh' }
+      - { src: "{{ dotfiles_path }}/git/.gitconfig", dest: '~/.gitconfig' }
+      - { src: "{{ dotfiles_path }}/git/.gitignore", dest: '~/.gitignore' }
+
   become: yes
   become_user: chl
