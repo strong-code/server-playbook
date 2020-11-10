@@ -1,0 +1,21 @@
+---
+- name: Check if irc tmux sessions already exists
+  command: tmux ls -F '#{session_name}'
+  register: tmux_list_sessions
+  ignore_errors: true
+
+# Note: irssi directory (config, theme, scripts) is symlinked by tasks/dotfiles.yml
+- name: Install irssi
+  apt:
+    name: irssi
+    state: present
+
+- name: Create irssi log directory
+  file:
+    path: /var/log/irssi
+    state: directory
+    owner: chl
+
+- name: Create irssi tmux session
+  command: tmux new -s irc irssi
+  when: tmux_list_sessions.stdout != "irc"
