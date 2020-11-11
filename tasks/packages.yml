@@ -9,11 +9,32 @@
     name: "{{ item }}"
     state: present
   loop:
+    - build-essential
     - vim
     - curl
     - git
+    - jq
 
-- name: Install asdf
-  git:
-    repo: https://github.com/asdf-vm/asdf.git
-    dest: ~/.asdf
+- name: Install nodejs plugin requirements
+  apt:
+    name: "{{ item }}"
+    state: present
+  loop:
+    - dirmngr
+    - gpg
+
+- block:
+  - name: Install asdf
+    git:
+      repo: https://github.com/asdf-vm/asdf.git
+      dest: ~/.asdf
+    become: yes
+    become_user: chl
+
+  - name: Install nodejs plugin
+    command: "${HOME}/.asdf/bin/asdf plugin add nodejs"
+    register: nodejs_add
+    failed_when: nodejs_add == 2
+
+  become: yes
+  become_user: chl
