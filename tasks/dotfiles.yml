@@ -6,7 +6,7 @@
 - block:
   - name: Create code dir structure 
     file:
-      path: ~/Documents/code 
+      path: /home/chl/Documents/code 
       state: directory
       owner: chl
       mode: 0755
