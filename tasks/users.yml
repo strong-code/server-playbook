@@ -1,13 +1,12 @@
 ---
-- name: Create admin group
+- name: Create user groups
   group:
-    name: admin
+    name: "{{ item }}"
     state: present
-
-- name: Create deploy group
-  group:
-    name: deploy
-    state: present
+  loop:
+    - admin
+    - deploy
+    - botto
 
 - name: Add chl user and admin/deploy group
   user:
