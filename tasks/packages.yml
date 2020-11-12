@@ -14,7 +14,7 @@
     - curl
     - git
     - jq
-    - postgresql-13
+    - postgresql-12
 
 - name: Install nodejs plugin requirements
   apt:
