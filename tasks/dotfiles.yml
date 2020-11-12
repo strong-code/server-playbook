@@ -1,18 +1,9 @@
 ---
+- name: Set task variables
+  set_fact:
+    dotfiles_path: /home/chl/Documents/code/dotfiles
+
 - block:
-  - name: Set task variables
-    set_fact:
-      dotfiles_path: /home/chl/Documents/code/dotfiles
-
-  - name: Clear out DO gargabe
-    file:
-      path: "~/.{{ item }}"
-      state: absent
-    loop:
-      - bash_logout
-      - bashrc
-      - profile  
-
   - name: Create code dir structure 
     file:
       path: ~/Documents/code 
@@ -22,10 +13,33 @@
 
   - name: Clone dotfiles repo
     git: 
-      repo: https://github.com/strong-code/dotfiles.git 
+      repo: git@github.com:strong-code/dotfiles.git 
       dest: "{{ dotfiles_path }}" 
       version: master
       accept_hostkey: yes
+
+    # Since cloning with ssh agent-forwarding gives root ownership
+  - name: Change local dotfile repo ownership
+    file:
+      path: "{{ dotfiles_path }}"
+      owner: chl
+      group: chl
+      mode: u=rwX,g=rX,o=rX
+      recurse: yes
+      state: directory
+
+  become: yes
+  become_user: root
+
+- block:
+  - name: Clear out DO gargabe
+    file:
+      path: "~/.{{ item }}"
+      state: absent
+    loop:
+      - bash_logout
+      - bashrc
+      - profile  
 
   - name: Symlink .bash_profile
     file:
