@@ -9,7 +9,6 @@
     name: "{{ item }}"
     state: present
   loop:
-    - build-essential
     - vim
     - curl
     - git
