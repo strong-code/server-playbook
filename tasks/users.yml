@@ -20,6 +20,12 @@
     shell: /bin/bash
     group: botto
 
+- name: Add deploy user
+  user:
+    name: deploy
+    shell: /bin/bash
+    group: deploy
+
 - name: Allow admin group to have password-less sudo
   lineinfile:
     dest: /etc/sudoers
