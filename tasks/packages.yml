@@ -42,3 +42,7 @@
     recurse: yes
     mode: u=rwX,g=rX,o=r
 
+- name: Install asdf nodejs plugin
+  command: /opt/asdf/bin/asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
+  become: yes
+  become_user: chl
