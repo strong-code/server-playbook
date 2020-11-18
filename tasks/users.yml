@@ -7,24 +7,25 @@
     - admin
     - deploy
     - botto
+    - asdf
 
 - name: Add chl user and admin/deploy group
   user:
     name: chl
     shell: /bin/bash
-    groups: admin,deploy
+    groups: admin,deploy,asdf
 
 - name: Add botto user
   user:
     name: botto
     shell: /bin/bash
-    group: botto
+    groups: botto,asdf
 
 - name: Add deploy user
   user:
     name: deploy
     shell: /bin/bash
-    group: deploy
+    groups: deploy,asdf
 
 - name: Allow admin group to have password-less sudo
   lineinfile:

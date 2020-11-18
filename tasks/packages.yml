@@ -28,22 +28,17 @@
     - dirmngr
     - gpg
 
-- name: Install asdf
+- name: Install asdf globally
   git:
     repo: https://github.com/asdf-vm/asdf.git
-    dest: ~/.asdf
-  become: yes
-  become_user: "{{ item }}"
-  loop:
-    - chl
-    - deploy
+    dest: /opt/asdf
 
-- name: Install nodejs plugin
-  command: "${HOME}/.asdf/bin/asdf plugin add nodejs"
-  register: nodejs_add
-  failed_when: nodejs_add == 2
-  become: yes
-  become_user: "{{ item }}"
-  loop:
-    - chl
-    - deploy
+- name: Set group permissions on /opt/asdf
+  file:
+    path: /opt/asdf
+    owner: chl
+    group: asdf
+    state: directory
+    recurse: yes
+    mode: u=rwX,g=rX,o=r
+
