@@ -5,11 +5,14 @@ Ansible playbook(s) to get my server just how I like it
 
 Ansible will run with `local` connection as the Vagrant provisioner, so just 
 
-  $ vagrant up
+    $ vagrant up
 
 # Running against temp test server
 
 Override remote host IP with 
 
-  $ ansible-playbook main.yml --extra-vars "var_host=<ip>"
+    $ ansible-playbook main.yml --extra-vars "var_host=<ip>"
 
+# DNS
+
+DNS records are managed under iwantmyname.com 

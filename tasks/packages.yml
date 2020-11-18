@@ -23,18 +23,22 @@
     - dirmngr
     - gpg
 
-- block:
-  - name: Install asdf
-    git:
-      repo: https://github.com/asdf-vm/asdf.git
-      dest: ~/.asdf
-    become: yes
-    become_user: chl
-
-  - name: Install nodejs plugin
-    command: "${HOME}/.asdf/bin/asdf plugin add nodejs"
-    register: nodejs_add
-    failed_when: nodejs_add == 2
-
+- name: Install asdf
+  git:
+    repo: https://github.com/asdf-vm/asdf.git
+    dest: ~/.asdf
   become: yes
-  become_user: chl
+  become_user: "{{ item }}"
+  loop:
+    - chl
+    - deploy
+
+- name: Install nodejs plugin
+  command: "${HOME}/.asdf/bin/asdf plugin add nodejs"
+  register: nodejs_add
+  failed_when: nodejs_add == 2
+  become: yes
+  become_user: "{{ item }}"
+  loop:
+    - chl
+    - deploy

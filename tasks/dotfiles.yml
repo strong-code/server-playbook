@@ -114,3 +114,13 @@
 
   become: yes
   become_user: chl
+
+- name: Symlink systemd service files
+  file:
+    src: "{{ dotfiles_path }}/server/init/{{ item }}.service"
+    dest: "/etc/systemd/system/{{ item }}.service"
+    owner: root
+    state: link
+  loop:
+    - botto
+    - strongcode

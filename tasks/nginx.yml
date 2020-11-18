@@ -1,8 +1,14 @@
 ---
-- name: Install, configure and start nginx with sites-enabled configs 
-  block:
-    - name: Install nginx
-      apt:
-        name: nginx
-        state: present
-      become: true
+- name: Install nginx
+  apt:
+    name: nginx
+    state: present
+  become: true
+
+- name: Symlink sites-enabled
+  file: 
+    src: /home/chl/Documents/code/dotfiles/server/sites-enabled
+    dest: /etc/nginx/sites-enabled
+    state: link
+    mode: 0755
+    force: yes
