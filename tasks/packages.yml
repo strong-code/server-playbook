@@ -4,6 +4,11 @@
 # should go in the corresponding task file. This makes it much
 # easier to keep track of packages when changing/removing/adding tasks
 #
+- name: Remove unwanted packages
+  apt:
+    name: gnome-keyring
+    state: absent
+
 - name: Install user packages
   apt:
     name: "{{ item }}"
