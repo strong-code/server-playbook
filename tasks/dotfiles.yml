@@ -63,6 +63,14 @@
       mode: 0644
       state: link
 
+  - name: Symlink sshd_config
+    file:
+      src: "{{ dotfiles_path }}/server/sshd_config"
+      dest: /etc/ssh/sshd_config
+      owner: root
+      mode: 0644
+      state: link
+
   - name: Add crontab
     command: "crontab {{ dotfiles_path }}/server/.crontab" 
 
