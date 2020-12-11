@@ -1,0 +1,11 @@
+---
+- name: Pull latest prometheus image
+  docker_container:
+    name: prometheus
+    image: prom/prometheus:master
+    pull: true
+    state: started
+    detach: yes
+    restart_policy: unless-stopped
+    published_ports:
+      - "9090:9090"
