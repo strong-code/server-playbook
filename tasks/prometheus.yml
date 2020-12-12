@@ -1,4 +1,17 @@
 ---
+- name: Create prometheus directory
+  file:
+    path: /etc/prometheus
+    state: directory
+    mode: 0755
+
+- name: Copy prometheus.yml
+  copy:
+    src: prometheus_config.yml
+    dest: /etc/prometheus/prometheus.yml
+    owner: root
+    group: root
+
 - name: Pull latest prometheus image
   docker_container:
     name: prometheus
@@ -9,3 +22,5 @@
     restart_policy: unless-stopped
     published_ports:
       - "9090:9090"
+    volumes:
+      - /etc/prometheus/:/etc/prometheus/
