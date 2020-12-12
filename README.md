@@ -15,4 +15,4 @@ Override remote host IP with
 
 # DNS
 
-DNS records are managed under iwantmyname.com 
+DNS records are managed under iwantmyname.com with cloud firewall rules on DO 
