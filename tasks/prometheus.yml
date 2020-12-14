@@ -6,8 +6,8 @@
     mode: 0755
 
 - name: Copy prometheus.yml
-  copy:
-    src: prometheus_config.yml
+  template:
+    src: prometheus.j2
     dest: /etc/prometheus/prometheus.yml
     owner: root
     group: root
@@ -18,9 +18,22 @@
     image: prom/prometheus:master
     pull: true
     state: started
+    restart: yes
     detach: yes
     restart_policy: unless-stopped
     published_ports:
       - "9090:9090"
     volumes:
       - /etc/prometheus/:/etc/prometheus/
+
+- name: Download and unarchive node_exporter
+  unarchive:
+    src: https://github.com/prometheus/node_exporter/releases/download/v1.0.1/node_exporter-1.0.1.linux-amd64.tar.gz 
+    dest: /etc/prometheus
+    remote_src: yes
+
+- name: start local node_exporter service
+  systemd:
+    state: started
+    name: node_exporter.service
+    daemon_reload: yes

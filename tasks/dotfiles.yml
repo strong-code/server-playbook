@@ -132,3 +132,4 @@
   loop:
     - botto
     - strongcode
+    - node_exporter
