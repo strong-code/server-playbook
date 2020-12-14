@@ -19,8 +19,7 @@
 
     - name: Add Docker apt repository
       apt_repository:
-        # There is no apt repo for groovy (20.10) so use focal (20.04) for now
-        repo: deb https://download.docker.com/linux/ubuntu focal stable
+        repo: deb https://download.docker.com/linux/ubuntu groovy stable
         state: present
 
     - name: Install Docker engine
