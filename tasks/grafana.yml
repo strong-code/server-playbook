@@ -1,0 +1,21 @@
+---
+- name: Create grafana data dir
+  file:
+    path: /etc/grafana
+    state: directory
+    mode: 0755
+    owner: grafana
+
+- name: Start grafana container
+  docker_container:
+    name: dashboard
+    image: grafana/grafana
+    pull: true
+    state: started
+    detach: yes
+    restart_policy: unless-stopped
+    user: "1003" # This is the the 'grafana' uid 
+    published_ports:
+      - "3005:3000"
+    volumes:
+      - /etc/grafana/:/var/lib/grafana/

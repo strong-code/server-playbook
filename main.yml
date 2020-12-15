@@ -25,3 +25,5 @@
       tags: irssi
     - include_tasks: tasks/prometheus.yml
       tags: prometheus
+    - include_tasks: tasks/grafana.yml
+      tags: grafana

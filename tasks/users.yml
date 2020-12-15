@@ -27,6 +27,11 @@
     shell: /bin/bash
     groups: deploy,asdf
 
+- name: Add grafana user
+  user:
+    name: grafana
+    shell: /bin/bash
+
 - name: Allow admin group to have password-less sudo
   lineinfile:
     dest: /etc/sudoers
