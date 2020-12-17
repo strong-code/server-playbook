@@ -19,6 +19,7 @@
     - git
     - jq
     - postgresql-12
+    - nmap
 
 - name: Install nodejs plugin requirements
   apt:
