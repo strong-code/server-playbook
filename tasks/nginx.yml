@@ -10,5 +10,13 @@
     src: /home/chl/Documents/code/dotfiles/server/sites-enabled
     dest: /etc/nginx/sites-enabled
     state: link
-    mode: 0755
+    mode: 0744
+    force: yes
+
+- name: Symlink default nginx.conf
+  file:
+    src: /home/chl/Documents/code/dotfiles/server/nginx.conf
+    dest: /etc/nginx/nginx.conf
+    state: link
+    mode: 0744
     force: yes
