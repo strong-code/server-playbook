@@ -8,7 +8,7 @@
 
 - name: Start grafana container
   docker_container:
-    name: dashboard
+    name: grafana
     image: grafana/grafana
     pull: true
     state: started
@@ -16,6 +16,6 @@
     restart_policy: unless-stopped
     user: "1003" # This is the the 'grafana' uid 
     published_ports:
-      - "3005:3000"
+      - "127.0.0.1:3005:3000"
     volumes:
       - /etc/grafana/:/var/lib/grafana/
