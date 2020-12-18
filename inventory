@@ -2,4 +2,4 @@
 127.0.0.1
 
 [remote]
-chl-server ansible_host=198.199.103.12 ansible_user=root ansible_python_interpreter=/usr/bin/python3
+chl-server ansible_host=localhost ansible_user=root ansible_python_interpreter=/usr/bin/python3
