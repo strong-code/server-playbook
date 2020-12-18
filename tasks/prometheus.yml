@@ -22,7 +22,7 @@
     detach: yes
     restart_policy: unless-stopped
     published_ports:
-      - "9090:9090"
+      - "127.0.0.1:9090:9090"
     volumes:
       - /etc/prometheus/:/etc/prometheus/
 
