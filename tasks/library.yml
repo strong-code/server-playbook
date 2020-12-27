@@ -19,6 +19,12 @@
     group: www-data
     mode: 0755
 
+- name: Copy over supported_media.xml manifest
+  copy:
+    src: supported_media.xml
+    dest: /home/deploy/PodcastGenerator/components/supported_media/supported_media.xml
+    force: yes
+
 - name: Clean up old files
   file:
     state: absent
