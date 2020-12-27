@@ -20,6 +20,9 @@
     - jq
     - postgresql-12
     - nmap
+    - php7.4
+    - php7.4-fpm
+    - php-xml
 
 - name: Install nodejs plugin requirements
   apt:
@@ -47,3 +50,4 @@
   command: /opt/asdf/bin/asdf plugin-add nodejs https://github.com/asdf-vm/asdf-nodejs.git
   become: yes
   become_user: chl
+  ignore_errors: yes

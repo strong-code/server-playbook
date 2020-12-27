@@ -1,0 +1,29 @@
+---
+- name: Download podcast generator
+  get_url:
+    url: https://github.com/PodcastGenerator/PodcastGenerator/archive/v3.1.tar.gz
+    dest: /home/deploy/v3.1.tar.gz
+
+- name: Extract archive
+  unarchive:
+    src: /home/deploy/v3.1.tar.gz
+    dest: /home/deploy
+    remote_src: yes
+
+- name: Copy webserver directory
+  copy:
+    src: /home/deploy/PodcastGenerator-3.1/PodcastGenerator
+    dest: /home/deploy
+    remote_src: yes
+    owner: www-data
+    group: www-data
+    mode: 0755
+
+- name: Clean up old files
+  file:
+    state: absent
+    path: "{{ item }}" 
+  loop:
+    - /home/deploy/PodcastGenerator-3.1
+    - /home/deploy/v3.1.tar.gz
+

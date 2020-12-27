@@ -11,19 +11,21 @@
         autoclean: yes
 
   tasks:
-    # - include_tasks: tasks/users.yml
-    #   tags: users
-    # - include_tasks: tasks/packages.yml
-    #   tags: packages 
-    # - include_tasks: tasks/dotfiles.yml
-    #   tags: dotfiles
-    # - include_tasks: tasks/docker.yml
-    #   tags: docker
-    # - include_tasks: tasks/pihole.yml
-    #   tags: pihole
-    # - include_tasks: tasks/irssi.yml
-    #   tags: irssi
+    - include_tasks: tasks/users.yml
+      tags: users
+    - include_tasks: tasks/packages.yml
+      tags: packages 
+    - include_tasks: tasks/dotfiles.yml
+      tags: dotfiles
+    - include_tasks: tasks/docker.yml
+      tags: docker
+    - include_tasks: tasks/pihole.yml
+      tags: pihole
+    - include_tasks: tasks/irssi.yml
+      tags: irssi
     - include_tasks: tasks/prometheus.yml
       tags: prometheus
     - include_tasks: tasks/grafana.yml
       tags: grafana
+    - include_tasks: tasks/library.yml
+      tags: library
