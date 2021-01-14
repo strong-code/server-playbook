@@ -27,5 +27,3 @@
       tags: prometheus
     - include_tasks: tasks/grafana.yml
       tags: grafana
-    - include_tasks: tasks/library.yml
-      tags: library
