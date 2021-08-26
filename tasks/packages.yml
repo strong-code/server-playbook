@@ -23,9 +23,6 @@
     - php7.4
     - php7.4-fpm
     - php-xml
-    - docker-ce
-    - docker-ce-cli
-    - containerd.io
 
 - name: Install nodejs plugin requirements
   apt:
