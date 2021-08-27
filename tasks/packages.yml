@@ -23,6 +23,7 @@
     - php7.4
     - php7.4-fpm
     - php-xml
+    - unzip
 
 - name: Install nodejs plugin requirements
   apt:
