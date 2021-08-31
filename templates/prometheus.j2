@@ -8,5 +8,5 @@ scrape_configs:
 
   - job_name: 'localhost'
     static_configs:
-      # Use the gateway of the docker bridge network 
-      - targets: ["172.17.0.1:9100"]
+      # Use 'prom-grafana' network container aliases 
+      - targets: ["http://prometheus:9090"]
