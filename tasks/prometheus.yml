@@ -25,6 +25,9 @@
       - "127.0.0.1:9090:9090"
     volumes:
       - /etc/prometheus/:/etc/prometheus/
+    networks:
+      - name: prom-grafana
+    purge_networks: yes
 
 - name: Download and unarchive node_exporter
   unarchive:

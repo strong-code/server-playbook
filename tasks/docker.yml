@@ -36,3 +36,9 @@
     - name: Install python Docker sdk
       pip:
         name: docker 
+
+    # To be used later in prometheus & grafana task files
+    - name: Create prom-grafana network
+      docker_network:
+        name: prom-grafana
+

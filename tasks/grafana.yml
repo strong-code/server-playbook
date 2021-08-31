@@ -19,3 +19,7 @@
       - "127.0.0.1:3005:3000"
     volumes:
       - /etc/grafana/:/var/lib/grafana/
+    networks:
+      - name: prom-grafana
+    purge_networks: yes
+
