@@ -9,4 +9,4 @@ scrape_configs:
   - job_name: 'localhost'
     static_configs:
       # Use 'prom-grafana' network container aliases 
-      - targets: ["http://prometheus:9090"]
+      - targets: ["prometheus:9090"]
