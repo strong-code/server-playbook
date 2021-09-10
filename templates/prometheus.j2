@@ -6,7 +6,8 @@ scrape_configs:
     static_configs:
       - targets: ['localhost:9090']
 
-  - job_name: 'localhost'
+  - job_name: 'chl-server'
     static_configs:
-      # Use 'prom-grafana' network container aliases 
-      - targets: ["prometheus:9090"]
+      # Hardcode the Docker host IP until we upgrade to Docker >= 20.04
+      # https://stackoverflow.com/a/62431165
+      - targets: ["172.17.0.1:9100"]
