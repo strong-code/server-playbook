@@ -1,5 +1,5 @@
 [local]
-127.0.0.1
+localhost ansible_ssh_port=2222 ansible_ssh_user='vagrant' 
 
 [remote]
 chl-server ansible_host=localhost ansible_user=chl ansible_python_interpreter=/usr/bin/python3
