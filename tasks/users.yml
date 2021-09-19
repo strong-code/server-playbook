@@ -32,6 +32,13 @@
     name: grafana
     shell: /bin/bash
 
+- name: Add env_keep variables to sudoers
+  lineinfile:
+    dest: /etc/sudoers
+    state: present
+    regexp: 'Defaults\s*env_reset'
+    line: 'Defaults env_keep+=SSH_AUTH_SOCK'
+
 - name: Allow admin group to have password-less sudo
   lineinfile:
     dest: /etc/sudoers
