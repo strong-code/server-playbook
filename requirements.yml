@@ -1,4 +1,0 @@
----
-roles:
-  - name: geerlingguy.certbot
-    version: 4.1.0

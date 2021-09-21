@@ -25,3 +25,5 @@
       tags: prometheus
     - include_tasks: tasks/grafana.yml
       tags: grafana
+    - include_tasks: tasks/certbot.yml
+      tags: certbot

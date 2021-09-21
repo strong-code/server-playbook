@@ -1,0 +1,51 @@
+# Taken from `geerlingguy.certbot` galaxy role, updated to work with Ubuntu 20.04
+---
+- name: Install snapd
+  package:
+    name: snapd
+    state: present
+  register: snapd_install
+
+- name: Enable snapd
+  systemd:
+    name: snapd.socket
+    enabled: true
+
+- name: Update snapd post-install
+  shell: snap install core; snap refresh core
+  changed_when: true
+  failed_when: true
+  when: snapd_install is changed
+
+- name: Install certbot via snap
+  snap:
+    name: certbot
+    classic: true
+
+- name: Symlink certbot
+  file:
+    src: /snap/bin/certbot
+    dest: /usr/bin/certbot
+    state: link
+
+- name: Set certbot script var
+  set_fact:
+    certbot_script: /usr/bin/certbot
+
+- name: Check if certificate exists for strongco.de root domain
+  stat: 
+    path: /etc/letsencrypt/live/strongco.de/cert.pem
+  register: strongcode_root_cert
+
+- name: Check if certificate exists for start.strongco.de domain 
+  stat:
+    path: /etc/letsencrypt/live/start.strongco.de/cert.pem
+  register: start_strongcode_cert
+
+- name: Generate new SSL cert for strongco.de if one doesn't exist
+  command: certbot --nginx --noninteractive --agree-tos --email colin@strongco.de -d strongco.de,www.strongco.de 
+  when: not strongcode_root_cert.stat.exists
+
+- name: Generate new SSL cert for start.strongco.de if one doesn't exist
+  command: certbot --nginx --noninteractive --agree-tos --email colin@strongco.de -d start.strongco.de 
+  when: not start_strongcode_cert.stat.exists
