@@ -12,6 +12,12 @@ Ansible playbook(s) to get my server just how I like it
 |[prometheus](tasks/prometheus/yml)|Install and configure Prometheus container and local `node_exporter`||
 |[grafana](tasks/grafana.yml)|Install and configure Grafana container||
 
+# Installing Galaxy requirements
+
+ansible-galaxy requirements are found in [requirements.yml](./requirements.yml). Install them with:
+
+    $ ansible-galaxy install -r ./requirements.yml
+
 # Testing locally with Vagrant
 
 Ansible will run with `local` connection as the Vagrant provisioner, so just 
