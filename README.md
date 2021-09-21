@@ -11,6 +11,7 @@ Ansible playbook(s) to get my server just how I like it
 |[irssi](tasks/irssi.yml)|Install irssi|`dotfiles` task will handle symlinking `~/.irssi` dir|
 |[prometheus](tasks/prometheus/yml)|Install and configure Prometheus container and local `node_exporter`||
 |[grafana](tasks/grafana.yml)|Install and configure Grafana container||
+|[certbot](tasks/certbot.yml)|Install certbot and install nginx certs for `strongco.de` and `start.strongco.de`|Email and domains are hardcoded. Safely idempotent.|
 
 # Testing locally with Vagrant
 
