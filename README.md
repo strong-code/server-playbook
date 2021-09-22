@@ -11,7 +11,7 @@ Ansible playbook(s) to get my server just how I like it
 |[irssi](tasks/irssi.yml)|Install irssi|`dotfiles` task will handle symlinking `~/.irssi` dir|
 |[prometheus](tasks/prometheus/yml)|Install and configure Prometheus container and local `node_exporter`||
 |[grafana](tasks/grafana.yml)|Install and configure Grafana container||
-|[certbot](tasks/certbot.yml)|Install certbot and install nginx certs for `strongco.de` and `start.strongco.de`|Email and domains are hardcoded. Safely idempotent.|
+|[certbot](tasks/certbot.yml)|Install certbot and install nginx certs for `strongco.de` and `start.strongco.de`|Email and domains are hardcoded. Safely idempotent. `certbot renew` is handled by [crontab](https://github.com/strong-code/server-playbook/blob/main/tasks/dotfiles.yml#L77) from [dotfiles](https://github.com/strong-code/dotfiles)|
 
 # Testing locally with Vagrant
 
