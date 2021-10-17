@@ -27,3 +27,5 @@
       tags: grafana
     - include_tasks: tasks/certbot.yml
       tags: certbot
+    - include_tasks: tasks/runner.yml
+      tags: runner

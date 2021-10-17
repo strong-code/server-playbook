@@ -1,0 +1,20 @@
+# Installs Github runner. Config uses a time-limited token, so must be done manually:
+# https://docs.github.com/en/actions/hosting-your-own-runners/adding-self-hosted-runners#adding-a-self-hosted-runner-to-a-repository
+---
+- name: Create /actions-runner directory
+  file:
+    path: /home/chl/Documents/code/actions-runner
+    state: directory
+    owner: chl
+    mode: 0755
+
+- name: Download actions-runner-linux-x86 package
+  get_url: 
+    url: https://github.com/actions/runner/releases/download/v2.283.2/actions-runner-linux-x64-2.283.2.tar.gz
+    dest: /home/chl/Documents/code/actions-runner/package.tar.gz
+    checksum: sha256:ef2b350068f7d581eb6840e3c399a42f9cb808f7ee9a0456f3ad97c84ccb2a9d
+
+- name: Extract package
+  unarchive:
+    src: /home/chl/Documents/code/actions-runner/package.tar.gz
+    dest: /home/chl/Documents/code/actions-runner
