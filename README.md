@@ -12,6 +12,7 @@ Ansible playbook(s) to get my server just how I like it
 |[prometheus](tasks/prometheus/yml)|Install and configure Prometheus container and local `node_exporter`||
 |[grafana](tasks/grafana.yml)|Install and configure Grafana container||
 |[certbot](tasks/certbot.yml)|Install certbot and install nginx certs for `strongco.de` and `start.strongco.de`|Email and domains are hardcoded. Safely idempotent. `certbot renew` is handled by [crontab](https://github.com/strong-code/server-playbook/blob/main/tasks/dotfiles.yml#L77) from [dotfiles](https://github.com/strong-code/dotfiles)|
+|[runner](tasks/runner.yml)|Download Github actions-runner package|Runner requires time-sensitive token to configure - see task note|
 
 # Testing locally with Vagrant
 
