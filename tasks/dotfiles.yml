@@ -126,13 +126,19 @@
   become: yes
   become_user: chl
 
+- name:
+  find:
+    paths: "{{ dotfiles_path }}/server/init"
+  register: service_dir
+
 - name: Symlink systemd service files
   file:
-    src: "{{ dotfiles_path }}/server/init/{{ item }}.service"
-    dest: "/etc/systemd/system/{{ item }}.service"
+    src: "{{ item.path }}" 
+    dest: "/etc/systemd/system/{{ item.path | basename }}"
     owner: root
     state: link
-  loop:
-    - botto
-    - strongcode
-    - node_exporter
+  with_items: "{{ service_dir.files }}"
+
+- name: Force daemon-reload
+  systemd:
+    daemon_reload: yes
